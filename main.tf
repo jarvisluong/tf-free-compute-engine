@@ -44,3 +44,14 @@ resource "google_compute_network" "free_gcp_network" {
 resource "google_compute_address" "static" {
   name = "free-gcp-ipv4"
 }
+
+resource "google_compute_firewall" "free_gcp_firewall" {
+  name    = "allow-ssh"
+  network = google_compute_network.free_gcp_network.self_link
+
+  allow {
+    protocol = "tcp"
+    ports    = ["22"]
+  }
+}
+
